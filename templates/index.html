@@ -1,0 +1,569 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="hero" class="hero-section">
+    <div class="hero-content">
+        <h1 data-aos="fade-up">RaoStudios Photography</h1>
+        <p data-aos="fade-up" data-aos-delay="200">Capturing Moments That Last a Lifetime</p>
+        <a href="#contact" class="btn btn-primary btn-lg mt-4" data-aos="fade-up" data-aos-delay="400">Book Now</a>
+    </div>
+    <div class="overlay"></div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="section-padding">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 data-aos="fade-up">Our Services</h2>
+            <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
+            <p data-aos="fade-up" data-aos-delay="200">Professional photography and videography for your special moments</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Wedding Photography</h3>
+                    <p>Stunning and elegant photography to capture your special day with artistic vision and attention to detail.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Pre-wedding shoots</li>
+                        <li><i class="fas fa-check-circle"></i> Ceremony coverage</li>
+                        <li><i class="fas fa-check-circle"></i> Reception highlights</li>
+                        <li><i class="fas fa-check-circle"></i> Family portraits</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Wedding Videography</h3>
+                    <p>Cinematic videos that tell your love story in a beautiful and emotional way, creating lasting memories.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Cinematic film</li>
+                        <li><i class="fas fa-check-circle"></i> Same-day edit</li>
+                        <li><i class="fas fa-check-circle"></i> Drone coverage</li>
+                        <li><i class="fas fa-check-circle"></i> Highlight reels</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Event Photography</h3>
+                    <p>Professional coverage for all types of events, including birthdays, anniversaries, corporate events, and more.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Birthday parties</li>
+                        <li><i class="fas fa-check-circle"></i> Anniversaries</li>
+                        <li><i class="fas fa-check-circle"></i> Corporate events</li>
+                        <li><i class="fas fa-check-circle"></i> Baby showers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Section -->
+<section id="portfolio" class="section-padding bg-dark">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 data-aos="fade-up">Our Portfolio</h2>
+            <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
+            <p data-aos="fade-up" data-aos-delay="200">A glimpse of our best work</p>
+        </div>
+        
+        <div class="portfolio-filters text-center mb-4" data-aos="fade-up">
+            <button class="btn btn-portfolio active" data-filter="all">All</button>
+            <button class="btn btn-portfolio" data-filter="wedding">Weddings</button>
+            <button class="btn btn-portfolio" data-filter="event">Events</button>
+            <button class="btn btn-portfolio" data-filter="video">Videos</button>
+            <button class="btn btn-portfolio" data-filter="equipment">Our Equipment</button>
+        </div>
+        
+        <div class="row portfolio-container">
+            <!-- Wedding Photography Items -->
+            <div class="col-md-4 col-sm-6 portfolio-item wedding" data-aos="fade-up">
+                <div class="portfolio-wrap">
+                    <a href="{{ url_for('static', filename='images/brideandgroom.jpg') }}" data-lightbox="portfolio" data-title="Traditional Wedding Ceremony">
+                        <img src="{{ url_for('static', filename='images/brideandgroom.jpg') }}" class="img-fluid" alt="Traditional Wedding Ceremony">
+                        <div class="portfolio-info">
+                            <h4>Traditional Wedding</h4>
+                            <p>Wedding Photography</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-6 portfolio-item wedding" data-aos="fade-up" data-aos-delay="100">
+                <div class="portfolio-wrap">
+                    <a href="{{ url_for('static', filename='images/#brideandgroom #weddingideas #photooftheday….jpg') }}" data-lightbox="portfolio" data-title="Bride and Groom">
+                        <img src="{{ url_for('static', filename='images/#brideandgroom #weddingideas #photooftheday….jpg') }}" class="img-fluid" alt="Bride and Groom">
+                        <div class="portfolio-info">
+                            <h4>Bride and Groom</h4>
+                            <p>Wedding Photography</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item wedding" data-aos="fade-up" data-aos-delay="100">
+                <div class="portfolio-wrap">
+                    <a href="{{ url_for('static', filename='images/portrait.jpg') }}" data-lightbox="portfolio" data-title="Bride and Groom">
+                        <img src="{{ url_for('static', filename='images/portrait.jpg') }}" class="img-fluid" alt="Bride and Groom">
+                        <div class="portfolio-info">
+                            <h4>Bride and Groom</h4>
+                            <p>Wedding Photography</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item wedding" data-aos="fade-up" data-aos-delay="100">
+                <div class="portfolio-wrap">
+                    <a href="{{ url_for('static', filename='images/close shot.jpg') }}" data-lightbox="portfolio" data-title="Bride and Groom">
+                        <img src="{{ url_for('static', filename='images/close shot.jpg') }}" class="img-fluid" alt="Bride and Groom">
+                        <div class="portfolio-info">
+                            <h4>Bride and Groom</h4>
+                            <p>Wedding Photography</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item wedding" data-aos="fade-up" data-aos-delay="100">
+                <div class="portfolio-wrap">
+                    <a href="{{ url_for('static', filename='images/wideangle.jpg') }}" data-lightbox="portfolio" data-title="Bride and Groom">
+                        <img src="{{ url_for('static', filename='images/wideangle.jpg') }}" class="img-fluid" alt="Bride and Groom">
+                        <div class="portfolio-info">
+                            <h4>Bride and Groom</h4>
+                            <p>Wedding Photography</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Equipment Photography Items -->
+            <div class="col-md-4 col-sm-6 portfolio-item equipment" data-aos="fade-up">
+                <div class="portfolio-wrap">
+                    <a href="{{ url_for('static', filename='images/camera.PNG') }}" data-lightbox="portfolio" data-title="Professional Camera">
+                        <img src="{{ url_for('static', filename='images/camera.PNG') }}" class="img-fluid" alt="Professional Camera">
+                        <div class="portfolio-info">
+                            <h4>Professional Camera</h4>
+                            <p>Studio Equipment</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            
+            <div class="col-md-4 col-sm-6 portfolio-item equipment" data-aos="fade-up" data-aos-delay="200">
+                <div class="portfolio-wrap">
+                    <a href="{{ url_for('static', filename='images/drne.JPG') }}" data-lightbox="portfolio" data-title="Aerial Drone">
+                        <img src="{{ url_for('static', filename='images/drne.JPG') }}" class="img-fluid" alt="Aerial Drone">
+                        <div class="portfolio-info">
+                            <h4>Aerial Drone</h4>
+                            <p>Studio Equipment</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Keep some original items -->
+            <div class="col-md-4 col-sm-6 portfolio-item wedding" data-aos="fade-up" data-aos-delay="100">
+                <div class="portfolio-wrap">
+                    <a href="{{ url_for('static', filename='images/bridegroom.jpg') }}" data-lightbox="portfolio" data-title="Bride and Groom">
+                        <img src="{{ url_for('static', filename='images/bridegroom.jpg') }}" class="img-fluid" alt="Bride and Groom">
+                        <div class="portfolio-info">
+                            <h4>Bride and Groom</h4>
+                            <p>Wedding Photography</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Keep some existing video items -->
+            <div class="col-md-4 col-sm-6 portfolio-item video" data-aos="fade-up">
+                <div class="portfolio-wrap">
+                    <a href="https://pixabay.com/get/g1411190275ad3a71c72e3be078e9728ad649b98b18bc272fe7b39fc69344ac3518a84ca29b89d566ecae5797c4b39ffe0b57415c49ca280c4ba50c5a6dcf04c0_1280.jpg" data-lightbox="portfolio" data-title="Wedding Videography">
+                        <img src="https://pixabay.com/get/g1411190275ad3a71c72e3be078e9728ad649b98b18bc272fe7b39fc69344ac3518a84ca29b89d566ecae5797c4b39ffe0b57415c49ca280c4ba50c5a6dcf04c0_1280.jpg" class="img-fluid" alt="Wedding Videography">
+                        <div class="portfolio-info">
+                            <h4>Wedding Videography</h4>
+                            <p>Video Production</p>
+                            <div class="video-icon"><i class="fas fa-play-circle"></i></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div> 
+        </div>
+    </div>
+</section>
+
+<!-- Packages Section -->
+<section id="packages" class="section-padding">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 data-aos="fade-up">Our Packages</h2>
+            <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
+            <p data-aos="fade-up" data-aos-delay="200">Choose the perfect package for your special day</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up">
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Silver Package</h3>
+                        <div class="package-price">
+                            <span class="price">₹23,000</span>
+                            <span class="period">per event</span>
+                        </div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> 4 Hours of Coverage</li>
+                            <li><i class="fas fa-check"></i> 2 Photographer</li>
+                            <li><i class="fas fa-check"></i> 200+ Edited Photos</li>
+                            <li><i class="fas fa-check"></i> Online Gallery</li>
+                            <li><i class="fas fa-check"></i> Digital Download</li>
+                            <li><i class="fas fa-check"></i> Video Coverage</li>
+                            <li><i class="fas fa-check"></i> Photo Album</li>
+                            <li><i class="fas fa-check"></i> Engagement Session</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline-primary btn-block">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="package-card featured">
+                    <div class="featured-tag">Most Popular</div>
+                    <div class="package-header">
+                        <h3>Gold Package</h3>
+                        <div class="package-price">
+                            <span class="price">₹53,500</span>
+                            <span class="period">per event</span>
+                        </div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> 6 Hours of Coverage</li>
+                            <li><i class="fas fa-check"></i> 2 Photographers</li>
+                            <li><i class="fas fa-check"></i> 700+ Edited Photos</li>
+                            <li><i class="fas fa-check"></i> Online Gallery</li>
+                            <li><i class="fas fa-check"></i> Digital Download</li>
+                            <li><i class="fas fa-check"></i> Basic Video Coverage</li>
+                            <li><i class="fas fa-check"></i> Photo Album (20 pages)</li>
+                            <li><i class="fas fa-check"></i> Engagement Session</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary btn-block">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Platinum Package</h3>
+                        <div class="package-price">
+                            <span class="price">₹1,15,000</span>
+                            <span class="period">per event</span>
+                        </div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Full Marriage Coverage</li>
+                            <li><i class="fas fa-check"></i> 5 Photographers</li>
+                            <li><i class="fas fa-check"></i> 800+ Edited Photos</li>
+                            <li><i class="fas fa-check"></i> Online Gallery</li>
+                            <li><i class="fas fa-check"></i> Digital Download</li>
+                            <li><i class="fas fa-check"></i> Premium Video Coverage</li>
+                            <li><i class="fas fa-check"></i> Luxury Photo Album (140 pages)</li>
+                            <li><i class="fas fa-check"></i> Engagement Session</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline-primary btn-block">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4" data-aos="fade-up">
+            <p class="custom-package-note">Looking for a custom package? <a href="#contact">Contact us</a> to discuss your specific needs.</p>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section-padding bg-dark">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 data-aos="fade-up">About Us</h2>
+            <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
+            <p data-aos="fade-up" data-aos-delay="200">The story behind our passion for photography</p>
+        </div>
+        
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                <div class="about-image">
+                    <img src="https://pixabay.com/get/gb5acf41d175acad2d36f9b0d7bc4a11aaa9796f1f1a8df6c0b0412c41c2ca23e6153800082a883ecf96f4aae4786ae65bffc2c467b607bc78773ea3d1ed976b5_1280.jpg" alt="Photographer" class="img-fluid rounded">
+                    <div class="experience-badge">
+                        <span class="number">10+</span>
+                        <span class="text">Years<br>Experience</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="about-content">
+                    <h3>Meet Harkesh Singh - Lead Photographer</h3>
+                    <p class="lead">Capturing life's precious moments with an artistic touch</p>
+                    <p>With over a decade of experience in photography and videography, Harkesh Singh has developed a unique style that blends traditional Indian elements with modern photography techniques.</p>
+                    <p>Harkesh specializes in Indian weddings and cultural events, understanding the importance of capturing the rich traditions and emotions that make these occasions special. His team at RaoStudios is dedicated to providing exceptional service and creating stunning visual memories that you'll cherish for generations.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">700+</span>
+                            <span class="stat-text">Weddings</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">350+</span>
+                            <span class="stat-text">Events</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-text">Happy Clients</span>
+                        </div>
+                    </div>
+                    <div class="about-signature">
+                        <span>Harkesh Singh</span>
+                        <small>Lead Photographer, RaoStudios</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Business Services Section -->
+<section id="business" class="section-padding">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 data-aos="fade-up">Business Services</h2>
+            <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
+            <p data-aos="fade-up" data-aos-delay="200">Additional services we provide</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mb-4" data-aos="fade-up">
+                <div class="business-service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>SBI Mini Bank Services</h3>
+                        <p>We are an authorized service point for SBI Mini Bank services, providing convenient banking solutions to our community.</p>
+                        <ul class="business-features">
+                            <li><i class="fas fa-check-circle"></i> Cash Deposits & Withdrawals</li>
+                            <li><i class="fas fa-check-circle"></i> Account Opening Assistance</li>
+                            <li><i class="fas fa-check-circle"></i> Money Transfers</li>
+                            <li><i class="fas fa-check-circle"></i> Balance Enquiry</li>
+                            <li><i class="fas fa-check-circle"></i> Mini Statements</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="business-service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>eMitra Services</h3>
+                        <p>As an authorized eMitra kiosk, we provide various government services to make administrative tasks easier for our clients.</p>
+                        <ul class="business-features">
+                            <li><i class="fas fa-check-circle"></i> Bill Payments (Electricity, Water, Phone)</li>
+                            <li><i class="fas fa-check-circle"></i> Certificate Applications</li>
+                            <li><i class="fas fa-check-circle"></i> Government Scheme Registrations</li>
+                            <li><i class="fas fa-check-circle"></i> Aadhaar Services</li>
+                            <li><i class="fas fa-check-circle"></i> Other G2C & B2C Services</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4" data-aos="fade-up">
+            <p>Visit our studio during business hours to avail these services or call us for more information.</p>
+            <a href="#contact" class="btn btn-primary">Contact for Business Services</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="section-padding bg-dark">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 data-aos="fade-up">Client Testimonials</h2>
+            <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
+            <p data-aos="fade-up" data-aos-delay="200">What our clients say about our services</p>
+        </div>
+        
+        <div class="testimonial-slider">
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="testimonial-card" data-aos="fade-up">
+                            <div class="testimonial-content">
+                                <i class="fas fa-quote-left quote-icon"></i>
+                                <p>"We are extremely satisfied with the photography services for our wedding. The team captured all the special moments beautifully, and the photos turned out amazing. Highly recommended!"</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <h4>Priya & Rahul</h4>
+                                    <p>Wedding Photography</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <div class="testimonial-card" data-aos="fade-up">
+                            <div class="testimonial-content">
+                                <i class="fas fa-quote-left quote-icon"></i>
+                                <p>"The videography work was exceptional! The team created a beautiful cinematic film of our wedding that brought tears to our eyes. They captured all the emotions and important moments perfectly."</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <h4>Anand & Meera</h4>
+                                    <p>Wedding Videography</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <div class="testimonial-card" data-aos="fade-up">
+                            <div class="testimonial-content">
+                                <i class="fas fa-quote-left quote-icon"></i>
+                                <p>"We hired them for our daughter's birthday celebration, and we couldn't be happier with the results. The photos captured the joy and excitement of the day, and the team was professional and friendly."</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <h4>Sunita Gupta</h4>
+                                    <p>Birthday Event</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section-padding">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 data-aos="fade-up">Contact RaoStudios</h2>
+            <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
+            <p data-aos="fade-up" data-aos-delay="200">Reach out to book your event or discuss our premium services</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
+                <div class="contact-info">
+                    <h3>Reach Out to RaoStudios</h3>
+                    <p>We'd love to capture your special moments. Contact us for bookings or any inquiries about our premium services.</p>
+                    
+                    <div class="contact-item">
+                        <div class="icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="content">
+                            <h4>Our Location</h4>
+                            <p>RJ18 Studio, Main Road badbar, near bus stand<br>buhana, jhunjhunu, Rajasthan 333502, India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="content">
+                            <h4>Call Us</h4>
+                            <p>
+                                <a href="tel:+919166882376">+91 9166882376</a><br>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="content">
+                            <h4>WhatsApp</h4>
+                            <p>
+                                <a href="https://wa.me/919166882376">+91 9166882376</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="content">
+                            <h4>Email Us</h4>
+                            <p>
+                                <a href="mailto:singhharkesh044@gmail.com">singhharkesh044@gmail.com</a><br>
+                                <a href="mailto:raostudiossrgh@gmail.com">raostudiossrgh@gmail.com</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="content">
+                            <h4>Working Hours</h4>
+                            <p>Monday - Saturday: 09:00 AM - 6:00 PM<br>Sunday: By Appointment Only</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</section>
+{% endblock %}
