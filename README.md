@@ -17,6 +17,25 @@ A modern, responsive portfolio website built with Flask. This application showca
 - **Contact Form** - Integrated email functionality
 - **Clean Architecture** - Organized Flask application structure
 
+## 📅 Booking System
+
+The booking page is designed to match the sleek aesthetic of the main site while providing a seamless experience for clients.
+
+### Booking Form Fields
+
+- **Name** - Client's full name
+- **Phone Number** - For direct contact
+- **Event Type** - Options include Wedding, Pre-Wedding, Haldi, etc.
+- **Event Duration** - Start and end dates
+- **Address** - Location of the event
+- **Additional Notes** - Any special requirements or information
+
+### Payment Processing
+
+- **Token Amount**: ₹500 (non-refundable)
+- **Payment Gateway**: Integrated Razorpay for secure Indian transactions
+- **Confirmation**: Automated email/SMS to client upon successful booking
+
 ## 🚀 Installation
 
 ### Prerequisites

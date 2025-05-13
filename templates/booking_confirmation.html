@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking Confirmed - Rao Studios{% endblock %}
+
+{% block content %}
+<section class="confirmation-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-title text-center mb-4">
+                    <h2 data-aos="fade-up">Booking Confirmed</h2>
+                    <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
+                    <p data-aos="fade-up" data-aos-delay="200">Thank you for choosing Rao Studios for your event</p>
+                </div>
+                
+                <div class="confirmation-container text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="confirmation-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    
+                    <div class="booking-details">
+                        <h4>Booking Details</h4>
+                        <div class="booking-info-card">
+                            <div class="row">
+                                <div class="col-md-6 text-md-end">Name:</div>
+                                <div class="col-md-6 text-md-start">{{ booking.name }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 text-md-end">Event Type:</div>
+                                <div class="col-md-6 text-md-start">{{ booking.event_type|title }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 text-md-end">Event Dates:</div>
+                                <div class="col-md-6 text-md-start">{{ booking.event_start_date.strftime('%d %b, %Y') }} to {{ booking.event_end_date.strftime('%d %b, %Y') }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 text-md-end">Payment Status:</div>
+                                <div class="col-md-6 text-md-start"><span class="badge badge-success">Confirmed</span></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 text-md-end">Booking ID:</div>
+                                <div class="col-md-6 text-md-start">{{ booking.id }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="next-steps mt-5" data-aos="fade-up" data-aos-delay="400">
+                        <h4>What's Next?</h4>
+                        <p>We'll contact you within 24 hours to discuss the details of your event.</p>
+                        <p>Meanwhile, if you have any questions, feel free to contact us.</p>
+                        <div class="contact-info">
+                            <p><i class="fas fa-phone"></i> +91 9166882376</p>
+                            <p><i class="fas fa-envelope"></i> raostudiossrgh@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5">
+                        <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

@@ -1,0 +1,353 @@
+/* ======================================
+   Booking Page Styles - Matching Main Site Theme
+====================================== */
+
+:root {
+    /* Color Variables - Matching main site */
+    --primary-color: #8a5ac7; /* Rich purple */
+    --primary-dark: #6a3da1; /* Darker purple */
+    --secondary-color: #e84a7f; /* Vibrant pink */
+    --accent-color: #fdc162; /* Warm gold/amber */
+    --dark-bg: #0f1730; /* Deep navy blue */
+    --darker-bg: #070e1e; /* Darker navy */
+    --light-text: #f8f5ff; /* Warmer white */
+    --medium-text: #c3c9e9; /* Lavender tint */
+    --dark-text: #2c2c40; /* Deep blue-gray */
+}
+
+/* Booking section styling */
+.booking-section {
+    padding: 120px 0 80px;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+}
+
+.booking-form-container {
+    background-color: var(--darker-bg);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(138, 90, 199, 0.2);
+}
+
+.booking-info {
+    background-color: rgba(15, 23, 48, 0.7);
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 30px;
+    border: 1px solid rgba(138, 90, 199, 0.2);
+}
+
+.booking-info h4 {
+    color: var(--light-text);
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+}
+
+.booking-info ol {
+    padding-left: 20px;
+    color: var(--medium-text);
+}
+
+.booking-info ol li {
+    margin-bottom: 10px;
+    color: var(--medium-text);
+}
+
+.payment-info-container {
+    margin-top: 40px;
+    background-color: rgba(15, 23, 48, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgba(138, 90, 199, 0.2);
+}
+
+.payment-info-container h4 {
+    color: var(--light-text);
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+}
+
+.payment-methods {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.payment-logo {
+    height: 40px;
+    margin-right: 15px;
+}
+
+/* Form styling to match main site */
+.form-control, .form-select {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(138, 90, 199, 0.3);
+    border-radius: 5px;
+    color: var(--light-text);
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+/* Fix for select dropdown text color */
+select.form-control, select.form-select {
+    color: var(--light-text);
+    background-color: rgba(15, 23, 48, 0.9);
+    border: 1px solid rgba(138, 90, 199, 0.3);
+    appearance: auto; /* Use browser default styling for better visibility */
+}
+
+/* Fix for select dropdown options */
+select.form-control option, select.form-select option {
+    background-color: var(--darker-bg);
+    color: var(--light-text);
+}
+
+/* Fix for date inputs */
+input[type="date"].form-control {
+    color-scheme: dark;
+    color: var(--light-text);
+}
+
+/* Fix for date input calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(138, 90, 199, 0.4);
+    color: var(--light-text);
+}
+
+.form-control::placeholder {
+    color: rgba(195, 201, 233, 0.6);
+}
+
+.form-control-label {
+    color: var(--light-text);
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+/* Button styling to match main site */
+.btn-primary {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    border-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 10px 25px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-color: var(--secondary-color);
+    color: var(--light-text);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(138, 90, 199, 0.3);
+}
+
+/* Payment page styling */
+.payment-section {
+    padding: 120px 0 80px;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+}
+
+.payment-summary-container {
+    background-color: var(--darker-bg);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    border: 1px solid rgba(138, 90, 199, 0.2);
+}
+
+.summary-card {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(15, 23, 48, 0.7);
+    border-radius: 8px;
+    border: 1px solid rgba(138, 90, 199, 0.2);
+}
+
+.payment-details {
+    border-top: 1px solid rgba(138, 90, 199, 0.3);
+    padding-top: 20px;
+}
+
+.amount {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--light-text);
+    margin: 5px 0;
+}
+
+.secure-info {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #28a745;
+}
+
+.secure-info i {
+    margin-right: 5px;
+}
+
+.additional-info {
+    background-color: rgba(15, 23, 48, 0.7);
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid rgba(138, 90, 199, 0.2);
+}
+
+.additional-info h5 {
+    margin-bottom: 15px;
+    color: var(--light-text);
+    font-family: 'Playfair Display', serif;
+}
+
+.additional-info ul {
+    padding-left: 20px;
+}
+
+.additional-info li {
+    margin-bottom: 8px;
+    color: var(--medium-text);
+}
+
+/* Alert styling */
+.alert-info {
+    background-color: rgba(23, 162, 184, 0.2);
+    border-color: rgba(23, 162, 184, 0.3);
+    color: var(--light-text);
+}
+
+/* Confirmation page styling */
+.confirmation-section {
+    padding: 120px 0 80px;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+}
+
+.confirmation-container {
+    background-color: var(--darker-bg);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    border: 1px solid rgba(138, 90, 199, 0.2);
+}
+
+.confirmation-icon {
+    font-size: 80px;
+    color: #28a745;
+    margin-bottom: 30px;
+}
+
+.booking-details {
+    margin-top: 40px;
+}
+
+.booking-info-card {
+    background-color: rgba(15, 23, 48, 0.7);
+    border-radius: 8px;
+    padding: 30px 20px;
+    margin-top: 20px;
+    border: 1px solid rgba(138, 90, 199, 0.2);
+}
+
+.booking-info-card .row {
+    margin-bottom: 10px;
+}
+
+.contact-info {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(15, 23, 48, 0.7);
+    border-radius: 8px;
+    display: inline-block;
+    border: 1px solid rgba(138, 90, 199, 0.2);
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    color: var(--medium-text);
+}
+
+.contact-info i {
+    margin-right: 10px;
+    color: var(--secondary-color);
+}
+
+.next-steps {
+    margin: 40px 0;
+}
+
+/* Booking button in navbar */
+.booking-btn {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: var(--light-text) !important;
+    padding: 8px 15px !important;
+    border-radius: 50px;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.booking-btn:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(138, 90, 199, 0.3);
+}
+
+/* Badge styling */
+.badge-success {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+/* For debug visualization */
+.razorpay-payment-button {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: var(--light-text);
+    padding: 10px 25px;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.razorpay-payment-button:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(138, 90, 199, 0.3);
+}
+
+@media (max-width: 767px) {
+    .booking-form-container, 
+    .payment-summary-container, 
+    .confirmation-container {
+        padding: 25px;
+    }
+    
+    .booking-btn {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+} 

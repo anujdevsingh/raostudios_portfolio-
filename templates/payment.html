@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment - Rao Studios{% endblock %}
+
+{% block content %}
+<section class="payment-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-title text-center">
+                    <h2 data-aos="fade-up">Secure Your Booking</h2>
+                    <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
+                    <p data-aos="fade-up" data-aos-delay="200">Complete your token payment to confirm your booking</p>
+                </div>
+                
+                <div class="payment-summary-container" data-aos="fade-up" data-aos-delay="300">
+                    <h4>Booking Summary</h4>
+                    <div class="summary-card">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Name:</strong> {{ booking_data.name }}</p>
+                                <p><strong>Phone:</strong> {{ booking_data.phone }}</p>
+                                <p><strong>Event Type:</strong> {{ booking_data.event_type|title }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Event Dates:</strong> {{ booking_data.event_start_date }} to {{ booking_data.event_end_date }}</p>
+                                <p><strong>Location:</strong> {{ booking_data.address|truncate(30) }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-details mt-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h5>Token Amount:</h5>
+                                <p class="amount">₹500.00</p>
+                                <small class="text-muted">This is a non-refundable booking token</small>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <!-- Test Mode Payment Button -->
+                                <form action="{{ url_for('process_payment') }}" method="POST">
+                                    <input type="hidden" name="razorpay_payment_id" value="test_payment_id_{{ booking_data.name|lower|replace(' ', '_') }}">
+                                    <button type="submit" class="btn btn-primary btn-lg">Simulate Payment (Test Mode)</button>
+                                </form>
+                                
+                                <!-- Production Mode Payment Button (commented out) -->
+                                <!-- 
+                                <button id="pay-button" class="btn btn-primary btn-lg">Pay Now</button>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info mt-4">
+                        <i class="fas fa-info-circle"></i> <strong>Test Mode Active:</strong> 
+                        In a real implementation, you would need to:
+                        <ol>
+                            <li>Create a Razorpay account at <a href="https://razorpay.com" target="_blank">razorpay.com</a></li>
+                            <li>Get your API keys from the Razorpay dashboard</li>
+                            <li>Set environment variables for RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="payment-info mt-4">
+                        <div class="secure-info">
+                            <i class="fas fa-lock"></i> Secure Payment via Razorpay
+                        </div>
+                        <div class="payment-methods">
+                            <img src="https://razorpay.com/assets/razorpay-logo.svg" alt="Razorpay" class="payment-logo" style="height: 40px;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="additional-info mt-5" data-aos="fade-up" data-aos-delay="400">
+                    <h5>Important Information:</h5>
+                    <ul>
+                        <li>This token amount confirms your booking with Rao Studios</li>
+                        <li>The token is non-refundable but will be adjusted in your final package</li>
+                        <li>Our team will contact you within 24 hours to discuss your requirements</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Razorpay Integration - Preloaded script for faster execution -->
+<script src="https://checkout.razorpay.com/v1/checkout.js" async></script>
+{% endblock %} 

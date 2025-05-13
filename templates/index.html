@@ -6,7 +6,7 @@
     <div class="hero-content">
         <h1 data-aos="fade-up">RaoStudios Photography</h1>
         <p data-aos="fade-up" data-aos-delay="200">Capturing Moments That Last a Lifetime</p>
-        <a href="#contact" class="btn btn-primary btn-lg mt-4" data-aos="fade-up" data-aos-delay="400">Book Now</a>
+        <a href="{{ url_for('booking') }}" class="btn btn-primary btn-lg mt-4" data-aos="fade-up" data-aos-delay="400">Book Now</a>
     </div>
     <div class="overlay"></div>
 </section>
@@ -235,7 +235,7 @@
                             <li><i class="fas fa-check"></i> Photo Album</li>
                             <li><i class="fas fa-check"></i> Engagement Session</li>
                         </ul>
-                        <a href="#contact" class="btn btn-outline-primary btn-block">Book Now</a>
+                        <a href="{{ url_for('booking') }}" class="btn btn-outline-primary btn-block">Book Now</a>
                     </div>
                 </div>
             </div>
@@ -261,7 +261,7 @@
                             <li><i class="fas fa-check"></i> Photo Album (20 pages)</li>
                             <li><i class="fas fa-check"></i> Engagement Session</li>
                         </ul>
-                        <a href="#contact" class="btn btn-primary btn-block">Book Now</a>
+                        <a href="{{ url_for('booking') }}" class="btn btn-primary btn-block">Book Now</a>
                     </div>
                 </div>
             </div>
@@ -286,14 +286,14 @@
                             <li><i class="fas fa-check"></i> Luxury Photo Album (140 pages)</li>
                             <li><i class="fas fa-check"></i> Engagement Session</li>
                         </ul>
-                        <a href="#contact" class="btn btn-outline-primary btn-block">Book Now</a>
+                        <a href="{{ url_for('booking') }}" class="btn btn-outline-primary btn-block">Book Now</a>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="text-center mt-4" data-aos="fade-up">
-            <p class="custom-package-note">Looking for a custom package? <a href="#contact">Contact us</a> to discuss your specific needs.</p>
+            <p class="custom-package-note">Looking for a custom package? <a href="{{ url_for('booking') }}">Contact us</a> to discuss your specific needs.</p>
         </div>
     </div>
 </section>
@@ -558,6 +558,12 @@
                             <h4>Working Hours</h4>
                             <p>Monday - Saturday: 09:00 AM - 6:00 PM<br>Sunday: By Appointment Only</p>
                         </div>
+                    </div>
+                    
+                    <div class="direct-contact-options mt-4">
+                        <a href="{{ url_for('booking') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-calendar-check me-2"></i> Book Your Session
+                        </a>
                     </div>
                 </div>
             </div>
