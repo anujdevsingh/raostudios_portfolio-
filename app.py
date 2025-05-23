@@ -3,10 +3,19 @@ import logging
 from werkzeug.middleware.proxy_fix import ProxyFix
 from extensions import app, mail, db
 
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("Warning: python-dotenv not installed. Please install it using: pip install python-dotenv")
+except Exception as e:
+    print(f"Warning: Failed to load .env file: {str(e)}")
+
 logging.basicConfig(level=logging.DEBUG)
 
 # Configure app
-app.secret_key = os.environ.get("SESSION_SECRET", "development-secret-key")
+app.secret_key = os.environ.get("SECRET_KEY", "development-secret-key")
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)  # needed for url_for to generate with https
 
 # Configure mail settings
@@ -34,3 +43,8 @@ with app.app_context():
 
 # Import routes after app is initialized to avoid circular imports
 from routes import *
+from admin_routes import *
+
+# Run the application
+if __name__ == "__main__":
+    app.run(host='127.0.0.1', port=8080, debug=True)

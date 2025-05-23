@@ -190,8 +190,8 @@
             <!-- Keep some existing video items -->
             <div class="col-md-4 col-sm-6 portfolio-item video" data-aos="fade-up">
                 <div class="portfolio-wrap">
-                    <a href="https://pixabay.com/get/g1411190275ad3a71c72e3be078e9728ad649b98b18bc272fe7b39fc69344ac3518a84ca29b89d566ecae5797c4b39ffe0b57415c49ca280c4ba50c5a6dcf04c0_1280.jpg" data-lightbox="portfolio" data-title="Wedding Videography">
-                        <img src="https://pixabay.com/get/g1411190275ad3a71c72e3be078e9728ad649b98b18bc272fe7b39fc69344ac3518a84ca29b89d566ecae5797c4b39ffe0b57415c49ca280c4ba50c5a6dcf04c0_1280.jpg" class="img-fluid" alt="Wedding Videography">
+                    <a href="{{ url_for('static', filename='images/video-thumbnail.jpg') }}" data-lightbox="portfolio" data-title="Wedding Videography">
+                        <img src="{{ url_for('static', filename='images/video-thumbnail.jpg') }}" class="img-fluid" alt="Wedding Videography">
                         <div class="portfolio-info">
                             <h4>Wedding Videography</h4>
                             <p>Video Production</p>
@@ -215,76 +215,106 @@
         </div>
         
         <div class="row">
-            <div class="col-md-4 mb-4" data-aos="fade-up">
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
                 <div class="package-card">
                     <div class="package-header">
-                        <h3>Silver Package</h3>
+                        <h3>Bronze Package</h3>
                         <div class="package-price">
-                            <span class="price">₹23,000</span>
+                            <span class="price">₹31,000</span>
                             <span class="period">per event</span>
                         </div>
                     </div>
                     <div class="package-body">
                         <ul class="package-features">
-                            <li><i class="fas fa-check"></i> 4 Hours of Coverage</li>
                             <li><i class="fas fa-check"></i> 2 Photographer</li>
-                            <li><i class="fas fa-check"></i> 200+ Edited Photos</li>
+                            <li><i class="fas fa-check"></i> 350+ Edited Photos</li>
                             <li><i class="fas fa-check"></i> Online Gallery</li>
                             <li><i class="fas fa-check"></i> Digital Download</li>
                             <li><i class="fas fa-check"></i> Video Coverage</li>
                             <li><i class="fas fa-check"></i> Photo Album</li>
-                            <li><i class="fas fa-check"></i> Engagement Session</li>
+                            <li><i class="fas fa-check"></i> pen drive(32gb)</li>
+                        </ul>
+                        <a href="{{ url_for('booking') }}" class="btn btn-outline-primary btn-block">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="package-card featured">
+                    <div class="featured-tag">Most Popular</div>
+                    <div class="package-header">
+                        <h3>Silver Package</h3>
+                        <div class="package-price">
+                            <span class="price">₹65,000</span>
+                            <span class="period">per event</span>
+                        </div>
+                        <small class="text-center d-block mt-2" style="color: #fdc162;">Best Value Package - Limited Time Offer</small>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> 3 Photographers</li>
+                            <li><i class="fas fa-check"></i> 600+ Edited Photos</li>
+                            <li><i class="fas fa-check"></i> Online Gallery</li>
+                            <li><i class="fas fa-check"></i> Digital Download</li>
+                            <li><i class="fas fa-check"></i> Premium Video Coverage</li>
+                            <li><i class="fas fa-check"></i> Cinematic Highlights</li>
+                            <li><i class="fas fa-check"></i> Luxury Photo Album</li>
+                            <li><i class="fas fa-check"></i> Drone shoot</li>
+                            <li><i class="fas fa-check"></i> Pen drive(64gb)</li>
+                        </ul>
+                        <a href="{{ url_for('booking') }}" class="btn btn-primary btn-block">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Gold Package</h3>
+                        <div class="package-price">
+                            <span class="price">₹75,000</span>
+                            <span class="period">per event</span>
+                        </div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Videography</li>
+                            <li><i class="fas fa-check"></i> Photography</li>
+                            <li><i class="fas fa-check"></i> Digital Download</li>
+                            <li><i class="fas fa-check"></i> Photo Album</li>
+                            <li><i class="fas fa-check"></i> Drone Shoot</li>
+                            <li><i class="fas fa-check"></i> Gallery Frame</li>
+                            <li><i class="fas fa-check"></i> Wall</li>
+                            <li><i class="fas fa-check"></i> Crane</li>
                         </ul>
                         <a href="{{ url_for('booking') }}" class="btn btn-outline-primary btn-block">Book Now</a>
                     </div>
                 </div>
             </div>
             
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="package-card featured">
-                    <div class="featured-tag">Most Popular</div>
-                    <div class="package-header">
-                        <h3>Gold Package</h3>
-                        <div class="package-price">
-                            <span class="price">₹53,500</span>
-                            <span class="period">per event</span>
-                        </div>
-                    </div>
-                    <div class="package-body">
-                        <ul class="package-features">
-                            <li><i class="fas fa-check"></i> 6 Hours of Coverage</li>
-                            <li><i class="fas fa-check"></i> 2 Photographers</li>
-                            <li><i class="fas fa-check"></i> 700+ Edited Photos</li>
-                            <li><i class="fas fa-check"></i> Online Gallery</li>
-                            <li><i class="fas fa-check"></i> Digital Download</li>
-                            <li><i class="fas fa-check"></i> Basic Video Coverage</li>
-                            <li><i class="fas fa-check"></i> Photo Album (20 pages)</li>
-                            <li><i class="fas fa-check"></i> Engagement Session</li>
-                        </ul>
-                        <a href="{{ url_for('booking') }}" class="btn btn-primary btn-block">Book Now</a>
-                    </div>
-                </div>
-            </div>
             
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="package-card">
                     <div class="package-header">
                         <h3>Platinum Package</h3>
                         <div class="package-price">
-                            <span class="price">₹1,15,000</span>
+                            <span class="price">₹1,13,000</span>
                             <span class="period">per event</span>
                         </div>
                     </div>
                     <div class="package-body">
                         <ul class="package-features">
                             <li><i class="fas fa-check"></i> Full Marriage Coverage</li>
-                            <li><i class="fas fa-check"></i> 5 Photographers</li>
+                            <li><i class="fas fa-check"></i> 4 Photographers</li>
                             <li><i class="fas fa-check"></i> 800+ Edited Photos</li>
-                            <li><i class="fas fa-check"></i> Online Gallery</li>
+                            <li><i class="fas fa-check"></i> Gallery frame </li>
                             <li><i class="fas fa-check"></i> Digital Download</li>
                             <li><i class="fas fa-check"></i> Premium Video Coverage</li>
-                            <li><i class="fas fa-check"></i> Luxury Photo Album (140 pages)</li>
+                            <li><i class="fas fa-check"></i> Luxury Photo Album </li>
                             <li><i class="fas fa-check"></i> Engagement Session</li>
+                            <li><i class="fas fa-check"></i> Pen drive(64gb)</li>
+                            <li><i class="fas fa-check"></i> Drone shoot</li>
+                            <li><i class="fas fa-check"></i> wall </li>
+                            <li><i class="fas fa-check"></i> Crane</li>
                         </ul>
                         <a href="{{ url_for('booking') }}" class="btn btn-outline-primary btn-block">Book Now</a>
                     </div>
@@ -310,7 +340,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
                 <div class="about-image">
-                    <img src="https://pixabay.com/get/gb5acf41d175acad2d36f9b0d7bc4a11aaa9796f1f1a8df6c0b0412c41c2ca23e6153800082a883ecf96f4aae4786ae65bffc2c467b607bc78773ea3d1ed976b5_1280.jpg" alt="Photographer" class="img-fluid rounded">
+                    <img src="{{ url_for('static', filename='images/lead_photo.jpg') }}" alt="Photographer" class="img-fluid rounded">
                     <div class="experience-badge">
                         <span class="number">10+</span>
                         <span class="text">Years<br>Experience</span>
@@ -497,70 +527,72 @@
             <p data-aos="fade-up" data-aos-delay="200">Reach out to book your event or discuss our premium services</p>
         </div>
         
-        <div class="row">
-            <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
+        <div class="row g-4">
+            <div class="col-md-6" data-aos="fade-up">
                 <div class="contact-info">
                     <h3>Reach Out to RaoStudios</h3>
                     <p>We'd love to capture your special moments. Contact us for bookings or any inquiries about our premium services.</p>
                     
-                    <div class="contact-item">
-                        <div class="icon">
-                            <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-items-container">
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Our Location</h4>
+                                <p>RJ18 Studio, Main Road badbar, near bus stand badbar <br>,buhana, jhunjhunu, Rajasthan 333502, India</p>
+                            </div>
                         </div>
-                        <div class="content">
-                            <h4>Our Location</h4>
-                            <p>RJ18 Studio, Main Road badbar, near bus stand<br>buhana, jhunjhunu, Rajasthan 333502, India</p>
+                        
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Call Us</h4>
+                                <p>
+                                    <a href="tel:+919166882376">+91 9166882376</a><br>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="content">
+                                <h4>WhatsApp</h4>
+                                <p>
+                                    <a href="https://wa.me/919166882376">+91 9166882376</a>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Email Us</h4>
+                                <p>
+                                    <a href="mailto:singhharkesh044@gmail.com">singhharkesh044@gmail.com</a><br>
+                                    <a href="mailto:raostudiosrgh@gmail.com">raostudiosrgh@gmail.com</a>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Working Hours</h4>
+                                <p>Monday - Saturday: 09:00 AM - 6:00 PM<br>Sunday: By Appointment Only</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="contact-item">
-                        <div class="icon">
-                            <i class="fas fa-phone-alt"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Call Us</h4>
-                            <p>
-                                <a href="tel:+919166882376">+91 9166882376</a><br>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="icon">
-                            <i class="fab fa-whatsapp"></i>
-                        </div>
-                        <div class="content">
-                            <h4>WhatsApp</h4>
-                            <p>
-                                <a href="https://wa.me/919166882376">+91 9166882376</a>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Email Us</h4>
-                            <p>
-                                <a href="mailto:singhharkesh044@gmail.com">singhharkesh044@gmail.com</a><br>
-                                <a href="mailto:raostudiossrgh@gmail.com">raostudiossrgh@gmail.com</a>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Working Hours</h4>
-                            <p>Monday - Saturday: 09:00 AM - 6:00 PM<br>Sunday: By Appointment Only</p>
-                        </div>
-                    </div>
-                    
-                    <div class="direct-contact-options mt-4">
+                    <div class="direct-contact-options">
                         <a href="{{ url_for('booking') }}" class="btn btn-primary btn-lg">
                             <i class="fas fa-calendar-check me-2"></i> Book Your Session
                         </a>
@@ -568,8 +600,165 @@
                 </div>
             </div>
             
-            
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="contact-form-card">
+                    <h3>Send Us a Message</h3>
+                    <p>Have questions or want to discuss your requirements? Fill out the form below and we'll get back to you as soon as possible.</p>
+                    
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }} alert-dismissible fade show">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <form action="{{ url_for('contact') }}" method="post" class="contact-form" id="contactForm">
+                        {{ form.csrf_token }}
+                        
+                        <!-- Message display area for AJAX responses -->
+                        <div id="formMessage" class="alert" style="display: none;"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="{{ form.name.id }}" class="form-label">{{ form.name.label }}</label>
+                                    {{ form.name(class="form-control", placeholder="Your Name") }}
+                                    {% if form.name.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {% for error in form.name.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="{{ form.email.id }}" class="form-label">{{ form.email.label }}</label>
+                                    {{ form.email(class="form-control", placeholder="Your Email") }}
+                                    {% if form.email.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {% for error in form.email.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="{{ form.phone.id }}" class="form-label">{{ form.phone.label }}</label>
+                                    {{ form.phone(class="form-control", placeholder="Your Phone Number") }}
+                                    {% if form.phone.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {% for error in form.phone.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="{{ form.event_type.id }}" class="form-label">{{ form.event_type.label }}</label>
+                                    {{ form.event_type(class="form-select") }}
+                                    {% if form.event_type.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {% for error in form.event_type.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="form-group">
+                                    <label for="{{ form.message.id }}" class="form-label">{{ form.message.label }}</label>
+                                    {{ form.message(class="form-control", rows="5", placeholder="Your Message") }}
+                                    {% if form.message.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {% for error in form.message.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-12 mt-auto">
+                                <button type="submit" class="btn btn-primary w-100" id="submitBtn">
+                                    <i class="fas fa-paper-plane me-2"></i> <span id="btnText">Send Message</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+<script>
+// AJAX Contact Form
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent normal form submission
+    
+    const form = this;
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const messageDiv = document.getElementById('formMessage');
+    
+    // Show loading state
+    submitBtn.disabled = true;
+    btnText.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+    
+    // Hide any previous messages
+    messageDiv.style.display = 'none';
+    
+    // Create FormData
+    const formData = new FormData(form);
+    
+    // Send AJAX request
+    fetch('{{ url_for("contact_ajax") }}', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Reset button
+        submitBtn.disabled = false;
+        btnText.innerHTML = 'Send Message';
+        
+        // Show message
+        messageDiv.style.display = 'block';
+        messageDiv.className = 'alert alert-' + (data.success ? 'success' : 'danger');
+        messageDiv.textContent = data.message;
+        
+        // If successful, reset form
+        if (data.success) {
+            form.reset();
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+    })
+    .catch(error => {
+        // Reset button
+        submitBtn.disabled = false;
+        btnText.innerHTML = 'Send Message';
+        
+        // Show error message
+        messageDiv.style.display = 'block';
+        messageDiv.className = 'alert alert-danger';
+        messageDiv.textContent = 'Sorry, there was an error sending your message. Please try again.';
+        
+        console.error('Error:', error);
+    });
+});
+</script>
+
 {% endblock %}

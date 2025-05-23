@@ -25,12 +25,12 @@
                     <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
                 </div>
                 <div class="mt-3">
-                    <a href="tel:+919876543210" class="contact-link">
-                        <i class="fas fa-phone-alt"></i> +91 98765 43210
+                    <a href="tel:+919166882376" class="contact-link">
+                        <i class="fas fa-phone-alt"></i> +91 9166882376
                     </a>
                     <br>
-                    <a href="mailto:info@raostudios.com" class="contact-link">
-                        <i class="fas fa-envelope"></i> info@raostudios.com
+                    <a href="mailto:raostudiosrgh@gmail.com" class="contact-link">
+                        <i class="fas fa-envelope"></i> raostudiosrgh@gmail.com
                     </a>
                 </div>
             </div>
@@ -40,8 +40,48 @@
             <div class="col-md-12 text-center">
                 <p class="copyright">
                     &copy; 2025 RaoStudios Photography & Videography. All Rights Reserved.
+                    <a href="{{ url_for('admin_login') }}" class="admin-link" id="adminLink">Admin</a>
                 </p>
             </div>
         </div>
     </div>
 </footer>
+
+<style>
+/* Admin link styling */
+.admin-link {
+    color: #aaa;
+    font-size: 0.8rem;
+    margin-left: 10px;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+.admin-link:hover {
+    color: #aaa;
+    opacity: 1;
+}
+</style>
+
+<script>
+// Optional: Make admin link require double-click to activate
+document.addEventListener('DOMContentLoaded', function() {
+    const adminLink = document.getElementById('adminLink');
+    
+    if (adminLink) {
+        let clickCount = 0;
+        
+        adminLink.addEventListener('click', function(e) {
+            clickCount++;
+            
+            if (clickCount === 1) {
+                e.preventDefault();
+                
+                setTimeout(() => {
+                    clickCount = 0;
+                }, 1000);
+            }
+        });
+    }
+});
+</script>

@@ -33,32 +33,14 @@
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <h5>Token Amount:</h5>
-                                <p class="amount">₹500.00</p>
+                                <p class="amount">₹1.00</p>
                                 <small class="text-muted">This is a non-refundable booking token</small>
                             </div>
                             <div class="col-md-6 text-end">
-                                <!-- Test Mode Payment Button -->
-                                <form action="{{ url_for('process_payment') }}" method="POST">
-                                    <input type="hidden" name="razorpay_payment_id" value="test_payment_id_{{ booking_data.name|lower|replace(' ', '_') }}">
-                                    <button type="submit" class="btn btn-primary btn-lg">Simulate Payment (Test Mode)</button>
-                                </form>
-                                
-                                <!-- Production Mode Payment Button (commented out) -->
-                                <!-- 
+                                <!-- Real Razorpay Payment Button -->
                                 <button id="pay-button" class="btn btn-primary btn-lg">Pay Now</button>
-                                -->
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="alert alert-info mt-4">
-                        <i class="fas fa-info-circle"></i> <strong>Test Mode Active:</strong> 
-                        In a real implementation, you would need to:
-                        <ol>
-                            <li>Create a Razorpay account at <a href="https://razorpay.com" target="_blank">razorpay.com</a></li>
-                            <li>Get your API keys from the Razorpay dashboard</li>
-                            <li>Set environment variables for RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET</li>
-                        </ol>
                     </div>
                     
                     <div class="payment-info mt-4">
@@ -67,6 +49,9 @@
                         </div>
                         <div class="payment-methods">
                             <img src="https://razorpay.com/assets/razorpay-logo.svg" alt="Razorpay" class="payment-logo" style="height: 40px;">
+                        </div>
+                        <div class="mt-2">
+                            <a href="https://merchant.razorpay.com/policy/QVW3lz73Gh4yNF/terms" target="_blank">View Payment Terms & Conditions</a>
                         </div>
                     </div>
                 </div>
@@ -84,6 +69,43 @@
     </div>
 </section>
 
-<!-- Razorpay Integration - Preloaded script for faster execution -->
-<script src="https://checkout.razorpay.com/v1/checkout.js" async></script>
+<!-- Razorpay Integration -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+document.getElementById('pay-button').onclick = function(e) {
+    var options = {
+        "key": "{{ key_id }}", // Razorpay Key ID from environment variables
+        "amount": "{{ amount }}00", // Amount in paise (1 * 100)
+        "currency": "INR",
+        "name": "Rao Studios",
+        "description": "Booking Token Payment",
+        "image": "https://your-logo-url.com/logo.png", // Replace with your logo URL
+        "handler": function (response) {
+            // Creating a form to submit the payment ID to server
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = "{{ url_for('process_payment') }}";
+            
+            var hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'razorpay_payment_id';
+            hiddenField.value = response.razorpay_payment_id;
+            
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();
+        },
+        "prefill": {
+            "name": "{{ booking_data.name }}",
+            "contact": "{{ booking_data.phone }}"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp = new Razorpay(options);
+    rzp.open();
+    e.preventDefault();
+}
+</script>
 {% endblock %} 

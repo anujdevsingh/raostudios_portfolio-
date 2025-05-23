@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Rao Studios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('admin_dashboard') }}">
+                <img src="{{ url_for('static', filename='svg/logo.svg') }}" alt="Rao Studios" class="logo-image">
+                Rao Studios Admin
+            </a>
+            <div class="d-flex">
+                <a href="{{ url_for('admin_export') }}" class="btn btn-outline-light me-2">
+                    <i class="fas fa-download"></i> Export Data
+                </a>
+                <a href="{{ url_for('index') }}" class="btn btn-outline-light me-2">
+                    <i class="fas fa-home"></i> Back to Site
+                </a>
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-danger">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <h1 class="mb-4">Admin Dashboard</h1>
+        
+        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="bookings-tab" data-bs-toggle="tab" data-bs-target="#bookings" type="button" role="tab" aria-controls="bookings" aria-selected="true">Bookings</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contacts-tab" data-bs-toggle="tab" data-bs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">Contacts</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="export-tab" data-bs-toggle="tab" data-bs-target="#export" type="button" role="tab" aria-controls="export" aria-selected="false">Export Options</button>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="myTabContent">
+            <!-- Bookings Tab -->
+            <div class="tab-pane fade show active" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Bookings</h5>
+                        <a href="{{ url_for('admin_export', type='bookings') }}" class="btn btn-sm btn-primary">Export Bookings</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Event Type</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Payment Status</th>
+                                        <th>Created At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for booking in bookings %}
+                                    <tr>
+                                        <td>{{ booking.id }}</td>
+                                        <td>{{ booking.name }}</td>
+                                        <td>{{ booking.phone }}</td>
+                                        <td>{{ booking.event_type }}</td>
+                                        <td>{{ booking.event_start_date }}</td>
+                                        <td>{{ booking.event_end_date }}</td>
+                                        <td>
+                                            <span class="badge {% if booking.payment_status == 'completed' %}bg-success{% else %}bg-warning{% endif %}">
+                                                {{ booking.payment_status }}
+                                            </span>
+                                        </td>
+                                        <td>{{ booking.created_at }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contacts Tab -->
+            <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Contact Messages</h5>
+                        <a href="{{ url_for('admin_export', type='contacts') }}" class="btn btn-sm btn-primary">Export Contacts</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Message</th>
+                                        <th>Created At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for contact in contacts %}
+                                    <tr>
+                                        <td>{{ contact.id }}</td>
+                                        <td>{{ contact.name }}</td>
+                                        <td>{{ contact.email }}</td>
+                                        <td>{{ contact.message }}</td>
+                                        <td>{{ contact.created_at }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Export Tab -->
+            <div class="tab-pane fade" id="export" role="tabpanel" aria-labelledby="export-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Export Options</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">CSV Export</h5>
+                                        <p>Download data as CSV files you can open in Excel.</p>
+                                        <p>Step 1: Run the export script on your server</p>
+                                        <code>python export_db.py</code>
+                                        <p class="mt-2">Step 2: Check the "exports" folder for CSV files</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">JSON Export</h5>
+                                        <p>Download data as JSON format:</p>
+                                        <a href="{{ url_for('admin_export') }}" class="btn btn-primary mb-2">All Data</a>
+                                        <a href="{{ url_for('admin_export', type='bookings') }}" class="btn btn-outline-primary mb-2">Only Bookings</a>
+                                        <a href="{{ url_for('admin_export', type='contacts') }}" class="btn btn-outline-primary">Only Contacts</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle fallback for missing SVG logo
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoImage = document.querySelector('.logo-image');
+            if (logoImage) {
+                logoImage.addEventListener('error', function() {
+                    this.src = "{{ url_for('static', filename='img/logo.png') }}";
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
