@@ -7,6 +7,11 @@ import os
 import json
 from datetime import datetime
 
+@app.route('/health')
+def health_check():
+    """Health check endpoint for deployment services"""
+    return jsonify({'status': 'healthy', 'timestamp': datetime.utcnow().isoformat()}), 200
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     """Route for home page with contact form handling"""
