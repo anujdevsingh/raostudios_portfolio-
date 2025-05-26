@@ -16,40 +16,28 @@ Your Flask application has been successfully migrated from PayU to Razorpay paym
 ## Step 2: Get API Credentials
 1. Login to your Razorpay Dashboard
 2. Go to **Settings** → **API Keys**
-3. Generate API Keys (if not already generated)
+3. Generate Live API Keys (ensure your account is activated)
 4. Note down:
-   - **Key ID** (starts with `rzp_test_` for test mode)
+   - **Key ID** (starts with `rzp_live_` for production)
    - **Key Secret** (keep this confidential)
 
 ## Step 3: Configure Environment Variables in Render
 Add these environment variables in your Render service:
 
 ```
-RAZORPAY_KEY_ID=rzp_test_xxxxxxxxxx
+RAZORPAY_KEY_ID=rzp_live_xxxxxxxxxx
 RAZORPAY_KEY_SECRET=xxxxxxxxxxxxxxxxxx
 ```
 
-**For Production:**
-- Use `rzp_live_` keys instead of `rzp_test_`
+**Important:**
+- Use only `rzp_live_` keys for production
 - Ensure your Razorpay account is activated for live transactions
+- Never use test keys in production environment
 
-## Step 4: Test the Integration
-1. Deploy your application to Render
-2. Visit `/test-payment` endpoint to check configuration
-3. Try making a test booking with ₹1 payment
-
-## Test Cards (for Test Mode)
-Use these test card details for testing:
-
-**Successful Payment:**
-- Card Number: `4111 1111 1111 1111`
-- Expiry: Any future date
-- CVV: Any 3 digits
-
-**Failed Payment:**
-- Card Number: `4000 0000 0000 0002`
-- Expiry: Any future date
-- CVV: Any 3 digits
+## Step 4: Deploy and Verify
+1. Deploy your application to Render with live keys
+2. Ensure all environment variables are properly set
+3. Test with real payment methods (small amounts recommended for initial testing)
 
 ## Features Implemented
 ✅ Razorpay Checkout integration
@@ -83,11 +71,11 @@ Use these test card details for testing:
 - Check if the order ID matches
 - Verify the payment amount
 
-### Test Endpoint
-Visit `https://your-app.onrender.com/test-payment` to check:
-- Configuration status
-- Test order creation
-- API connectivity
+### Configuration Check
+Verify in your Render dashboard that:
+- RAZORPAY_KEY_ID is set with live key (starts with rzp_live_)
+- RAZORPAY_KEY_SECRET is set correctly
+- Application logs show successful Razorpay client initialization
 
 ## Security Notes
 - Never expose your Key Secret in frontend code

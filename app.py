@@ -25,7 +25,11 @@ except Exception as e:
     logger.warning(f"Failed to load .env file: {str(e)}")
 
 # Configure app
-app.secret_key = os.environ.get("SECRET_KEY", "development-secret-key")
+secret_key = os.environ.get("SECRET_KEY")
+if not secret_key:
+    logger.error("SECRET_KEY environment variable not set! Using fallback for development only.")
+    secret_key = "development-secret-key-change-in-production"
+app.secret_key = secret_key
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)  # needed for url_for to generate with https
 
 logger.info("Flask app configured")
@@ -81,12 +85,25 @@ except Exception as e:
     logger.error(f"Error importing routes: {str(e)}")
     raise
 
+# Add production error handlers
+@app.errorhandler(404)
+def not_found_error(error):
+    logger.warning(f"404 error: {request.url}")
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    logger.error(f"500 error: {str(error)}")
+    db.session.rollback()
+    return render_template('500.html'), 500
+
 logger.info("Application startup completed successfully")
 
 # Run the application
 if __name__ == "__main__":
     # Use PORT environment variable for deployment, fallback to 8080 for local development
     port = int(os.environ.get('PORT', 8080))
-    debug = os.environ.get('FLASK_ENV') != 'production'
+    # Only enable debug mode if explicitly set to 'development'
+    debug = os.environ.get('FLASK_ENV') == 'development'
     logger.info(f"Starting server on port {port}, debug={debug}")
     app.run(host='0.0.0.0', port=port, debug=debug)

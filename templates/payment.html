@@ -38,13 +38,9 @@
                             </div>
                             <div class="col-md-6 text-end">
                                 {% if razorpay_key_id and razorpay_order %}
-                                <!-- Test Payment Button (bypasses Razorpay) -->
-                                <button id="test-pay-button" class="btn btn-success btn-lg razorpay-pay-button me-3">
-                                    <i class="fas fa-check-circle me-2"></i>Test Payment (Skip Gateway)
-                                </button>
                                 <!-- Razorpay Payment Button -->
                                 <button id="rzp-button" class="btn btn-primary btn-lg razorpay-pay-button">
-                                    <i class="fas fa-credit-card me-2"></i>Pay with Razorpay
+                                    <i class="fas fa-credit-card me-2"></i>Pay Now
                                 </button>
                                 {% else %}
                                 <div class="alert alert-warning">
@@ -271,55 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
         rzp.open();
     });
     
-    // Test payment button handler
-    var testPayButton = document.getElementById('test-pay-button');
-    if (testPayButton) {
-        testPayButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('Test payment initiated - bypassing Razorpay');
-            
-            // Show loading state
-            testPayButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing Test Payment...';
-            testPayButton.disabled = true;
-            
-            // Simulate payment success after 2 seconds
-            setTimeout(function() {
-                // Create form to submit test payment details
-                var form = document.createElement('form');
-                form.method = 'POST';
-                form.action = config.successUrl;
-                
-                // Add fake payment response data
-                var paymentId = document.createElement('input');
-                paymentId.type = 'hidden';
-                paymentId.name = 'razorpay_payment_id';
-                paymentId.value = 'pay_test_' + Date.now();
-                form.appendChild(paymentId);
-                
-                var orderId = document.createElement('input');
-                orderId.type = 'hidden';
-                orderId.name = 'razorpay_order_id';
-                orderId.value = config.orderId;
-                form.appendChild(orderId);
-                
-                var signature = document.createElement('input');
-                signature.type = 'hidden';
-                signature.name = 'razorpay_signature';
-                signature.value = 'test_signature_' + Date.now();
-                form.appendChild(signature);
-                
-                // Add test mode flag
-                var testMode = document.createElement('input');
-                testMode.type = 'hidden';
-                testMode.name = 'test_mode';
-                testMode.value = 'true';
-                form.appendChild(testMode);
-                
-                document.body.appendChild(form);
-                form.submit();
-            }, 2000);
-        });
-    }
+
     
     console.log('Razorpay initialized with order:', config.orderId);
 });
@@ -644,12 +592,7 @@ document.addEventListener('DOMContentLoaded', function() {
         text-align: center !important;
     }
     
-    #test-pay-button {
-        margin-right: 0 !important;
-        margin-bottom: 15px;
-        display: block;
-        width: 100%;
-    }
+
     
     #rzp-button {
         display: block;
