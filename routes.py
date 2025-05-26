@@ -5,12 +5,69 @@ from flask_mail import Message
 from models import Booking, Contact
 import os
 import json
-from datetime import datetime
+import requests
+import time
+import hashlib
+import uuid
+from datetime import datetime, timedelta
+
+# Razorpay Configuration
+import razorpay
+
+RAZORPAY_KEY_ID = os.environ.get('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET')
+
+# Initialize Razorpay client
+razorpay_client = None
+if RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET:
+    razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
+
+def verify_razorpay_signature(razorpay_order_id, razorpay_payment_id, razorpay_signature):
+    """Verify Razorpay payment signature"""
+    try:
+        if razorpay_client:
+            razorpay_client.utility.verify_payment_signature({
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': razorpay_payment_id,
+                'razorpay_signature': razorpay_signature
+            })
+            return True
+    except Exception as e:
+        print(f"Signature verification failed: {str(e)}")
+        return False
+    return False
 
 @app.route('/health')
 def health_check():
     """Health check endpoint for deployment services"""
     return jsonify({'status': 'healthy', 'timestamp': datetime.utcnow().isoformat()}), 200
+
+@app.route('/test-payment')
+def test_payment():
+    """Test route to check Razorpay configuration"""
+    config_status = {
+        'RAZORPAY_KEY_ID': 'Set' if RAZORPAY_KEY_ID else 'Not Set',
+        'RAZORPAY_KEY_SECRET': 'Set' if RAZORPAY_KEY_SECRET else 'Not Set',
+        'RAZORPAY_CLIENT': 'Initialized' if razorpay_client else 'Not Initialized'
+    }
+    
+    # Test order creation
+    test_order = None
+    if razorpay_client:
+        try:
+            test_order = razorpay_client.order.create({
+                'amount': 100,  # Amount in paise (₹1.00)
+                'currency': 'INR',
+                'receipt': 'TEST_RECEIPT_123'
+            })
+        except Exception as e:
+            test_order = f"Error: {str(e)}"
+    
+    return jsonify({
+        'config': config_status,
+        'test_order': test_order,
+        'timestamp': datetime.utcnow().isoformat()
+    })
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -63,98 +120,95 @@ def booking():
         print("Form submitted")
         if form.validate_on_submit():
             print("Form validated successfully")
-            # Store form data in session to use after payment
-            session['booking_data'] = {
-                'name': form.name.data,
-                'phone': form.phone.data,
-                'event_type': form.event_type.data,
-                'event_start_date': form.event_start_date.data.strftime('%Y-%m-%d'),
-                'event_end_date': form.event_end_date.data.strftime('%Y-%m-%d'),
-                'address': form.address.data,
-                'notes': form.notes.data
-            }
-            # Redirect to payment page
-            return redirect(url_for('process_payment'))
-        else:
-            print("Form validation failed")
-            print("Errors:", form.errors)
-    return render_template('booking.html', form=form)
-
-@app.route('/process_payment', methods=['GET', 'POST'])
-def process_payment():
-    """Route for processing payment"""
-    if 'booking_data' not in session:
-        flash('Please complete the booking form first', 'warning')
-        return redirect(url_for('booking'))
-    
-    if request.method == 'POST':
-        # Get payment details from Razorpay
-        payment_id = request.form.get('razorpay_payment_id')
-        
-        if payment_id:
-            # Create booking record
-            booking_data = session['booking_data']
+            
+            # Create booking record first (without payment)
             new_booking = Booking(
-                name=booking_data['name'],
-                phone=booking_data['phone'],
-                event_type=booking_data['event_type'],
-                event_start_date=datetime.strptime(booking_data['event_start_date'], '%Y-%m-%d').date(),
-                event_end_date=datetime.strptime(booking_data['event_end_date'], '%Y-%m-%d').date(),
-                address=booking_data['address'],
-                notes=booking_data['notes'],
-                payment_id=payment_id,
-                payment_status='completed'
+                name=form.name.data,
+                phone=form.phone.data,
+                event_type=form.event_type.data,
+                event_start_date=form.event_start_date.data,
+                event_end_date=form.event_end_date.data,
+                address=form.address.data,
+                notes=form.notes.data,
+                payment_status='pending'  # Set as pending initially
             )
             
             db.session.add(new_booking)
             db.session.commit()
             
-            # Clear the session
-            session.pop('booking_data', None)
+            # Store booking ID in session for payment
+            session['booking_id'] = new_booking.id
             
-            # Get default sender email or use a fallback
-            default_sender = os.environ.get('MAIL_DEFAULT_SENDER', 'raostudiossrgh@gmail.com')
-            
-            # Send confirmation email
-            msg = Message(
-                'Booking Confirmation - Rao Studios',
-                sender=default_sender,
-                recipients=[booking_data.get('email', 'info@raostudios.com')]
-            )
-            msg.body = f"""
-            Dear {booking_data['name']},
-            
-            Thank you for booking with Rao Studios!
-            
-            Booking Details:
-            - Event Type: {booking_data['event_type']}
-            - Event Dates: From {booking_data['event_start_date']} to {booking_data['event_end_date']}
-            - Address: {booking_data['address']}
-            
-            Our team will contact you within 24 hours to discuss further details.
-            
-            Best regards,
-            Rao Studios Team
-            """
-            
-            try:
-                mail.send(msg)
-            except Exception as e:
-                # Log the error but continue with the booking process
-                print(f"Email sending failed: {str(e)}")
-            
-            return redirect(url_for('booking_confirmation', booking_id=new_booking.id))
+            # Redirect directly to payment page
+            return redirect(url_for('process_payment', booking_id=new_booking.id))
+        else:
+            print("Form validation failed")
+            print("Errors:", form.errors)
+    return render_template('booking.html', form=form)
+
+@app.route('/process_payment/<int:booking_id>', methods=['GET', 'POST'])
+def process_payment(booking_id):
+    """Route for processing payment with Razorpay"""
+    # Get booking from database
+    booking = Booking.query.get_or_404(booking_id)
     
-    # For GET request, show payment page with Razorpay integration
-    razorpay_key_id = os.environ.get('RAZORPAY_KEY_ID')
-    if not razorpay_key_id:
+    # Check if payment is already completed
+    if booking.payment_status == 'completed':
+        flash('Payment for this booking has already been completed.', 'info')
+        return redirect(url_for('index'))
+    
+    # Debug logging
+    print(f"Razorpay Key ID: {'Set' if RAZORPAY_KEY_ID else 'Not Set'}")
+    print(f"Razorpay Client: {'Initialized' if razorpay_client else 'Not Initialized'}")
+    
+    # Check if Razorpay is configured
+    if not razorpay_client:
         flash("Payment system is not properly configured. Please contact the administrator.", "danger")
-        return redirect(url_for('booking'))
+        print("ERROR: Razorpay credentials not configured")
+        return redirect(url_for('index'))
+    
+    try:
+        # Create Razorpay order
+        order_amount = 100  # ₹1.00 in paise
+        order_currency = 'INR'
+        order_receipt = f"RAO_BOOKING_{booking_id}_{int(time.time())}"
         
-    return render_template('payment.html', 
-                           key_id=razorpay_key_id, 
-                           amount=1, # ₹1 token amount
-                           booking_data=session['booking_data'])
+        razorpay_order = razorpay_client.order.create({
+            'amount': order_amount,
+            'currency': order_currency,
+            'receipt': order_receipt,
+            'payment_capture': 1  # Auto capture payment
+        })
+        
+        # Store order details in session
+        session['razorpay_order'] = {
+            'order_id': razorpay_order['id'],
+            'amount': order_amount,
+            'currency': order_currency,
+            'booking_id': booking_id
+        }
+        
+        # Convert booking to dict for template
+        booking_data = {
+            'name': booking.name,
+            'phone': booking.phone,
+            'event_type': booking.event_type,
+            'event_start_date': booking.event_start_date.strftime('%Y-%m-%d'),
+            'event_end_date': booking.event_end_date.strftime('%Y-%m-%d'),
+            'address': booking.address,
+            'notes': booking.notes
+        }
+        
+        return render_template('payment.html',
+                             razorpay_key_id=RAZORPAY_KEY_ID,
+                             razorpay_order=razorpay_order,
+                             amount=1.00,
+                             booking_data=booking_data)
+        
+    except Exception as e:
+        print(f"Error creating Razorpay order: {str(e)}")
+        flash("Error creating payment order. Please try again.", "danger")
+        return redirect(url_for('index'))
 
 @app.route('/booking/confirmation/<int:booking_id>')
 def booking_confirmation(booking_id):
@@ -247,3 +301,133 @@ def contact_ajax():
             return jsonify({'success': False, 'message': 'Sorry, there was an error sending your message. Please try again.'})
     else:
         return jsonify({'success': False, 'message': 'Please check the form and try again.', 'errors': form.errors})
+
+@app.route('/terms-and-conditions')
+def terms_and_conditions():
+    """Route for Terms & Conditions page"""
+    return render_template('terms_and_conditions.html')
+
+@app.route('/privacy-policy')
+def privacy_policy():
+    """Route for Privacy Policy page"""
+    return render_template('privacy_policy.html')
+
+@app.route('/refund-cancellation-policy')
+def refund_cancellation_policy():
+    """Route for Refund & Cancellation Policy page"""
+    return render_template('refund_cancellation_policy.html')
+
+@app.route('/shipping-policy')
+def shipping_policy():
+    """Route for shipping and delivery policy page"""
+    return render_template('shipping_policy.html')
+
+@app.route('/payment/success', methods=['POST'])
+def payment_success():
+    """Handle Razorpay payment success response"""
+    try:
+        # Get Razorpay response data
+        razorpay_payment_id = request.form.get('razorpay_payment_id')
+        razorpay_order_id = request.form.get('razorpay_order_id')
+        razorpay_signature = request.form.get('razorpay_signature')
+        test_mode = request.form.get('test_mode') == 'true'
+        
+        # Verify signature (skip verification for test mode)
+        signature_valid = test_mode or verify_razorpay_signature(razorpay_order_id, razorpay_payment_id, razorpay_signature)
+        
+        if signature_valid:
+            if 'razorpay_order' in session:
+                # Get booking ID from session
+                booking_id = session['razorpay_order'].get('booking_id')
+                if booking_id:
+                    # Update existing booking record
+                    booking = Booking.query.get(booking_id)
+                    if booking:
+                        booking.payment_id = razorpay_payment_id
+                        booking.payment_status = 'completed'
+                        db.session.commit()
+                
+                        # Send confirmation email
+                        try:
+                            default_sender = os.environ.get('MAIL_DEFAULT_SENDER', 'raostudiosrgh@gmail.com')
+                            
+                            msg = Message(
+                                'Payment Confirmation - Rao Studios',
+                                sender=default_sender,
+                                recipients=[default_sender]
+                            )
+                            msg.body = f"""
+                            Dear {booking.name},
+                            
+                            Thank you for your payment! Your booking with Rao Studios is now confirmed.
+                            
+                            Booking Details:
+                            - Event Type: {booking.event_type}
+                            - Event Dates: From {booking.event_start_date} to {booking.event_end_date}
+                            - Address: {booking.address}
+                            - Payment ID: {razorpay_payment_id}
+                            - Razorpay Order ID: {razorpay_order_id}
+                            
+                            Our team will contact you within 24 hours to discuss further details.
+                            
+                            Best regards,
+                            Rao Studios Team
+                            """
+                            
+                            mail.send(msg)
+                        except Exception as e:
+                            print(f"Email sending failed: {str(e)}")
+                        
+                        # Clear session data
+                        session.pop('razorpay_order', None)
+                        
+                        # Redirect to confirmation page with success message
+                        flash('Payment successful! Your booking is confirmed. We will contact you within 24 hours.', 'success')
+                        return redirect(url_for('booking_confirmation', booking_id=booking.id))
+                else:
+                    flash('Payment was not successful. Please try again.', 'danger')
+                    return redirect(url_for('process_payment', booking_id=booking_id))
+        else:
+            flash('Payment verification failed. Please contact support.', 'danger')
+            booking_id = session.get('razorpay_order', {}).get('booking_id')
+            if booking_id:
+                return redirect(url_for('process_payment', booking_id=booking_id))
+            else:
+                return redirect(url_for('booking'))
+            
+    except Exception as e:
+        print(f"Payment success handling error: {str(e)}")
+        flash('An error occurred while processing your payment. Please contact support.', 'danger')
+        booking_id = session.get('razorpay_order', {}).get('booking_id')
+        if booking_id:
+            return redirect(url_for('process_payment', booking_id=booking_id))
+        else:
+            return redirect(url_for('booking'))
+
+@app.route('/payment/failure', methods=['POST'])
+def payment_failure():
+    """Handle Razorpay payment failure response"""
+    try:
+        error_code = request.form.get('error[code]')
+        error_description = request.form.get('error[description]')
+        error_source = request.form.get('error[source]')
+        error_step = request.form.get('error[step]')
+        error_reason = request.form.get('error[reason]')
+        
+        print(f"Payment failed - Code: {error_code}, Description: {error_description}, Source: {error_source}, Step: {error_step}, Reason: {error_reason}")
+        
+        flash(f'Payment failed: {error_description or error_reason or "Unknown error"}. Please try again.', 'danger')
+        booking_id = session.get('razorpay_order', {}).get('booking_id')
+        if booking_id:
+            return redirect(url_for('process_payment', booking_id=booking_id))
+        else:
+            return redirect(url_for('booking'))
+        
+    except Exception as e:
+        print(f"Payment failure handling error: {str(e)}")
+        flash('Payment failed. Please try again.', 'danger')
+        booking_id = session.get('razorpay_order', {}).get('booking_id')
+        if booking_id:
+            return redirect(url_for('process_payment', booking_id=booking_id))
+        else:
+            return redirect(url_for('booking'))

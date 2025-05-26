@@ -19,10 +19,9 @@
             <div class="col-md-4 text-center text-md-end">
                 <h5>Connect With Us</h5>
                 <div class="social-icons">
-                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/share/19LtzX3CU3/" target="_blank" rel="noopener noreferrer" class="social-icon" title="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/rj18studio?utm_source=qr&igsh=NHd6ZXcwaWU4N3ll" target="_blank" rel="noopener noreferrer" class="social-icon" title="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/919166882376" target="_blank" rel="noopener noreferrer" class="social-icon" title="Chat with us on WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 </div>
                 <div class="mt-3">
                     <a href="tel:+919166882376" class="contact-link">
@@ -38,6 +37,15 @@
         <hr class="mt-4">
         <div class="row">
             <div class="col-md-12 text-center">
+                <div class="policy-links mb-3">
+                    <a href="{{ url_for('terms_and_conditions') }}" class="policy-link">Terms & Conditions</a>
+                    <span class="separator">|</span>
+                    <a href="{{ url_for('privacy_policy') }}" class="policy-link">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="{{ url_for('refund_cancellation_policy') }}" class="policy-link">Refund & Cancellation Policy</a>
+                    <span class="separator">|</span>
+                    <a href="{{ url_for('shipping_policy') }}" class="policy-link">Shipping & Delivery Policy</a>
+                </div>
                 <p class="copyright">
                     &copy; 2025 RaoStudios Photography & Videography. All Rights Reserved.
                     <a href="{{ url_for('admin_login') }}" class="admin-link" id="adminLink">Admin</a>
@@ -48,6 +56,33 @@
 </footer>
 
 <style>
+/* Policy links styling */
+.policy-links {
+    margin-bottom: 15px;
+}
+
+.policy-link {
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.policy-link:hover {
+    color: #007bff;
+    text-decoration: underline;
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.separator {
+    color: #6c757d;
+    margin: 0 8px;
+    font-weight: 300;
+}
+
 /* Admin link styling */
 .admin-link {
     color: #aaa;
@@ -60,6 +95,37 @@
 .admin-link:hover {
     color: #aaa;
     opacity: 1;
+}
+
+/* Responsive policy links */
+@media (max-width: 768px) {
+    .policy-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .separator {
+        display: none;
+    }
+    
+    .policy-link {
+        padding: 8px 15px;
+        border: 1px solid #dee2e6;
+        border-radius: 20px;
+        background-color: #f8f9fa;
+        font-size: 0.85rem;
+        width: auto;
+        min-width: 200px;
+        text-align: center;
+    }
+    
+    .policy-link:hover {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
 }
 </style>
 

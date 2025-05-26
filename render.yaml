@@ -14,6 +14,25 @@ services:
         fromDatabase:
           name: raostudios-db
           property: connectionString
+      # Add these environment variables in Render dashboard:
+      # - key: PAYU_MERCHANT_KEY
+      #   value: your-payu-merchant-key
+      # - key: PAYU_MERCHANT_SALT
+      #   value: your-payu-merchant-salt
+      # - key: PAYU_BASE_URL
+      #   value: https://test.payu.in (for test) or https://secure.payu.in (for live)
+      # - key: PAYU_SUCCESS_URL
+      #   value: /payment/success
+      # - key: PAYU_FAILURE_URL
+      #   value: /payment/failure
+      # - key: SECRET_KEY
+      #   value: your-flask-secret-key
+      # - key: MAIL_USERNAME
+      #   value: your-gmail-username
+      # - key: MAIL_PASSWORD
+      #   value: your-gmail-app-password
+      # - key: MAIL_DEFAULT_SENDER
+      #   value: your-default-sender-email
     autoDeploy: true
 
 databases:

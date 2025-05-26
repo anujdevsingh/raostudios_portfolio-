@@ -7,23 +7,40 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="section-title text-center mb-4">
-                    <h2 data-aos="fade-up">Booking Confirmed</h2>
-                    <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
-                    <p data-aos="fade-up" data-aos-delay="200">Thank you for choosing Rao Studios for your event</p>
-                </div>
-                
-                <div class="confirmation-container text-center" data-aos="fade-up" data-aos-delay="300">
-                    <div class="confirmation-icon">
+                <div class="section-title text-center">
+                    <div class="confirmation-icon" data-aos="zoom-in">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    
+                    <h2 data-aos="fade-up">Booking Confirmed!</h2>
+                    <div class="header-line" data-aos="fade-up" data-aos-delay="100"></div>
+                    <p data-aos="fade-up" data-aos-delay="200">Thank you for choosing Rao Studios. Your booking has been successfully confirmed.</p>
+                </div>
+                
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages" data-aos="fade-up" data-aos-delay="150">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                
+                <div class="confirmation-container" data-aos="fade-up" data-aos-delay="300">
                     <div class="booking-details">
                         <h4>Booking Details</h4>
                         <div class="booking-info-card">
                             <div class="row">
                                 <div class="col-md-6 text-md-end">Name:</div>
                                 <div class="col-md-6 text-md-start">{{ booking.name }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 text-md-end">Phone:</div>
+                                <div class="col-md-6 text-md-start">{{ booking.phone }}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 text-md-end">Event Type:</div>
@@ -34,32 +51,381 @@
                                 <div class="col-md-6 text-md-start">{{ booking.event_start_date.strftime('%d %b, %Y') }} to {{ booking.event_end_date.strftime('%d %b, %Y') }}</div>
                             </div>
                             <div class="row">
+                                <div class="col-md-6 text-md-end">Location:</div>
+                                <div class="col-md-6 text-md-start">{{ booking.address }}</div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6 text-md-end">Payment Status:</div>
-                                <div class="col-md-6 text-md-start"><span class="badge badge-success">Confirmed</span></div>
+                                <div class="col-md-6 text-md-start">
+                                    {% if booking.payment_status == 'completed' %}
+                                        <span class="badge badge-success">Paid & Confirmed</span>
+                                    {% else %}
+                                        <span class="badge badge-warning">Pending</span>
+                                    {% endif %}
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 text-md-end">Booking ID:</div>
-                                <div class="col-md-6 text-md-start">{{ booking.id }}</div>
+                                <div class="col-md-6 text-md-start">#{{ booking.id }}</div>
+                            </div>
+                            {% if booking.payment_id %}
+                            <div class="row">
+                                <div class="col-md-6 text-md-end">Payment ID:</div>
+                                <div class="col-md-6 text-md-start">{{ booking.payment_id }}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="next-steps mt-5" data-aos="fade-up" data-aos-delay="500">
+                        <h4>What's Next?</h4>
+                        <div class="steps-container">
+                            <div class="step-item">
+                                <div class="step-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h5>We'll Contact You</h5>
+                                    <p>Our team will reach out within 24 hours to discuss your event requirements and finalize the details.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h5>Event Planning</h5>
+                                    <p>We'll work together to plan every detail of your event to ensure it's perfect and memorable.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-icon">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h5>Capture Memories</h5>
+                                    <p>On your event day, we'll be there to capture every precious moment with our professional photography and videography.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="next-steps mt-5" data-aos="fade-up" data-aos-delay="400">
-                        <h4>What's Next?</h4>
-                        <p>We'll contact you within 24 hours to discuss the details of your event.</p>
-                        <p>Meanwhile, if you have any questions, feel free to contact us.</p>
-                        <div class="contact-info">
-                            <p><i class="fas fa-phone"></i> +91 9166882376</p>
-                            <p><i class="fas fa-envelope"></i> raostudiossrgh@gmail.com</p>
+                    <div class="contact-info mt-5" data-aos="fade-up" data-aos-delay="600">
+                        <h4>Need Help?</h4>
+                        <p>If you have any questions or need to make changes to your booking, feel free to contact us:</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+919166882376">+91 9166882376</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:raostudiosrgh@gmail.com">raostudiosrgh@gmail.com</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>RJ18 Studio, Main Road badbar, near bus stand badbar, buhana, jhunjhunu, Rajasthan 333502</span>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="mt-5">
-                        <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home</a>
+                    <div class="action-buttons mt-5 text-center" data-aos="fade-up" data-aos-delay="700">
+                        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-home me-2"></i>Back to Home
+                        </a>
+                        <a href="{{ url_for('index', _anchor='portfolio') }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-images me-2"></i>View Our Work
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+.confirmation-section {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    min-height: 100vh;
+    padding: 50px 0;
+}
+
+.section-title h2 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.section-title p {
+    color: #cccccc;
+}
+
+.header-line {
+    height: 4px;
+    width: 80px;
+    background: linear-gradient(45deg, #28a745, #20c997);
+    margin: 15px auto;
+    border-radius: 2px;
+}
+
+.confirmation-icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 30px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.confirmation-container {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(40, 167, 69, 0.2);
+    border: 1px solid #333333;
+}
+
+.booking-details h4 {
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.booking-info-card {
+    background: #2a2a2a;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #444444;
+    margin-bottom: 20px;
+}
+
+.booking-info-card .row {
+    margin-bottom: 15px;
+    padding: 8px 0;
+    border-bottom: 1px solid #333333;
+}
+
+.booking-info-card .row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.booking-info-card .col-md-6 {
+    color: #cccccc;
+    font-weight: 500;
+}
+
+.booking-info-card .col-md-6:first-child {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.badge {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.badge-success {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+}
+
+.badge-warning {
+    background: linear-gradient(45deg, #ffc107, #fd7e14);
+    color: #000;
+}
+
+.next-steps h4 {
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #28a745;
+}
+
+.step-icon {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.step-content h5 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.step-content p {
+    color: #cccccc;
+    margin-bottom: 0;
+}
+
+.contact-info h4 {
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #cccccc;
+}
+
+.contact-item i {
+    color: #28a745;
+    width: 20px;
+    text-align: center;
+}
+
+.contact-item a {
+    color: #20c997;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: #28a745;
+}
+
+.flash-messages {
+    margin-bottom: 30px;
+}
+
+.alert {
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border: none;
+}
+
+.alert-success {
+    background: rgba(40, 167, 69, 0.15);
+    border-left: 4px solid #28a745;
+    color: #ffffff;
+}
+
+.alert-danger {
+    background: rgba(220, 53, 69, 0.15);
+    border-left: 4px solid #dc3545;
+    color: #ffffff;
+}
+
+.alert-info {
+    background: rgba(23, 162, 184, 0.15);
+    border-left: 4px solid #17a2b8;
+    color: #ffffff;
+}
+
+.btn-close {
+    filter: invert(1);
+    opacity: 0.7;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #20c997, #17a2b8);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-outline-light {
+    border: 2px solid #cccccc;
+    color: #cccccc;
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+    background: #cccccc;
+    color: #000;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .confirmation-container {
+        padding: 25px;
+    }
+    
+    .booking-info-card {
+        padding: 20px;
+    }
+    
+    .step-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .contact-details {
+        align-items: center;
+    }
+    
+    .action-buttons .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .action-buttons .btn:last-child {
+        margin-bottom: 0;
+    }
+}
+</style>
 {% endblock %} 

@@ -121,7 +121,18 @@
                             <h4>Booking Token</h4>
                             <p>A non-refundable token payment of ₹1 will be collected to secure your booking.</p>
                             <div class="payment-methods">
-                                <img src="https://razorpay.com/assets/razorpay-logo.svg" alt="Razorpay" class="payment-logo">
+                                <div class="razorpay-logo-container">
+                                    <span class="razor-text">Razor</span>
+                                    <span class="pay-text">pay</span>
+                                    <i class="fas fa-shield-alt razorpay-icon"></i>
+                                </div>
+                                <p class="payment-text">Secure payments powered by Razorpay</p>
+                                <div class="payment-icons">
+                                    <i class="fas fa-credit-card" title="Credit/Debit Cards"></i>
+                                    <i class="fas fa-university" title="Net Banking"></i>
+                                    <i class="fas fa-mobile-alt" title="UPI"></i>
+                                    <i class="fas fa-wallet" title="Wallets"></i>
+                                </div>
                             </div>
                         </div>
                         
@@ -144,4 +155,190 @@
         </div>
     </div>
 </section>
+
+<style>
+.payment-info-container {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 5px solid #ff6b35;
+    margin: 20px 0;
+    border: 1px solid #444444;
+}
+
+.payment-info-container h4 {
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.razorpay-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 15px 0 10px 0;
+}
+
+.razor-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #3395ff;
+}
+
+.pay-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6b35;
+}
+
+.razorpay-icon {
+    font-size: 1.5rem;
+    color: #3395ff;
+    margin-left: 10px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.payment-text {
+    text-align: center;
+    color: #cccccc;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+
+.payment-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.payment-icons i {
+    font-size: 1.5rem;
+    color: #cccccc;
+    transition: all 0.3s ease;
+}
+
+.payment-icons i:hover {
+    color: #ff6b35;
+    transform: scale(1.2);
+}
+
+.booking-form-container {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+    border: 1px solid #333333;
+}
+
+.booking-info {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 5px solid #ff6b35;
+    margin-top: 30px;
+    border: 1px solid #333333;
+}
+
+.booking-info h4 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.booking-info ol {
+    padding-left: 20px;
+}
+
+.booking-info li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+
+.booking-section {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    min-height: 100vh;
+    padding: 50px 0;
+}
+
+.section-title h2 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.section-title p {
+    color: #cccccc;
+}
+
+.header-line {
+    height: 4px;
+    width: 80px;
+    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    margin: 15px auto;
+    border-radius: 2px;
+}
+
+.form-control, .form-select {
+    border: 2px solid #444444;
+    border-radius: 8px;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+    background: #2a2a2a;
+    color: #ffffff;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #ff6b35;
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+    background: #333333;
+}
+
+.form-control::placeholder {
+    color: #888888;
+}
+
+.form-control-label {
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+    background: linear-gradient(45deg, #e55a2b, #e6841a);
+}
+
+@media (max-width: 768px) {
+    .booking-form-container {
+        padding: 25px;
+    }
+    
+    .payment-icons {
+        gap: 15px;
+    }
+    
+    .payment-icons i {
+        font-size: 1.3rem;
+    }
+}
+</style>
 {% endblock %} 

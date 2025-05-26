@@ -8,9 +8,183 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+        body {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
         .navbar-brand img {
             height: 30px;
             margin-right: 10px;
+        }
+        .navbar-dark {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%) !important;
+            border-bottom: 1px solid #333333;
+        }
+        .container {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            border: 1px solid #333333;
+        }
+        h1 {
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        .nav-tabs {
+            border-bottom: 2px solid #333333;
+        }
+        .nav-tabs .nav-link {
+            background: #2a2a2a;
+            border: 1px solid #444444;
+            color: #cccccc;
+            margin-right: 5px;
+            border-radius: 8px 8px 0 0;
+        }
+        .nav-tabs .nav-link:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+        .nav-tabs .nav-link.active {
+            background: #28a745;
+            border-color: #28a745;
+            color: #ffffff;
+        }
+        .card {
+            background: #1e1e1e;
+            border: 1px solid #333333;
+            border-radius: 12px;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            border-bottom: 1px solid #333333;
+            color: #ffffff;
+        }
+        .card-body {
+            background: #1e1e1e;
+        }
+        .table {
+            color: #ffffff;
+            background-color: transparent;
+        }
+        .table > tbody > tr > td {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border-color: #444444;
+            vertical-align: middle;
+        }
+        .table-striped > tbody > tr:nth-of-type(odd) > td {
+            background-color: #2a2a2a;
+            color: #ffffff;
+        }
+        .table-striped > tbody > tr:nth-of-type(even) > td {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        .table th {
+            background: #333333;
+            border-color: #444444;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .table td {
+            border-color: #444444;
+            vertical-align: middle;
+            color: #ffffff;
+        }
+        .table tbody tr:hover {
+            background-color: #333333 !important;
+        }
+        .table tbody tr:hover td {
+            background-color: #333333 !important;
+            color: #ffffff !important;
+        }
+        .badge {
+            font-size: 0.8rem;
+            padding: 6px 12px;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            border: none;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #20c997, #17a2b8);
+            transform: translateY(-1px);
+        }
+        .btn-outline-light:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+        .alert {
+            border-radius: 8px;
+            border: none;
+        }
+        .alert-success {
+            background: rgba(40, 167, 69, 0.15);
+            border-left: 4px solid #28a745;
+            color: #ffffff;
+        }
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.15);
+            border-left: 4px solid #dc3545;
+            color: #ffffff;
+        }
+        .alert-info {
+            background: rgba(23, 162, 184, 0.15);
+            border-left: 4px solid #17a2b8;
+            color: #ffffff;
+        }
+        .export-card {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            border: 1px solid #444444;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        .export-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.2);
+        }
+        .export-card .card-body {
+            padding: 25px;
+        }
+        .export-card h5 {
+            color: #28a745;
+            font-weight: 700;
+        }
+        .stats-row {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #333333;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #28a745;
+        }
+        .stat-label {
+            color: #cccccc;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -47,7 +221,39 @@
             {% endif %}
         {% endwith %}
         
-        <h1 class="mb-4">Admin Dashboard</h1>
+        <h1 class="mb-4">
+            <i class="fas fa-tachometer-alt me-3"></i>Admin Dashboard
+        </h1>
+        
+        <!-- Statistics Row -->
+        <div class="stats-row">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-item">
+                        <div class="stat-number">{{ bookings|length }}</div>
+                        <div class="stat-label">Total Bookings</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-item">
+                        <div class="stat-number">{{ bookings|selectattr('payment_status', 'equalto', 'completed')|list|length }}</div>
+                        <div class="stat-label">Paid Bookings</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-item">
+                        <div class="stat-number">{{ contacts|length }}</div>
+                        <div class="stat-label">Contact Messages</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-item">
+                        <div class="stat-number">{{ bookings|selectattr('payment_status', 'equalto', 'pending')|list|length }}</div>
+                        <div class="stat-label">Pending Payments</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -148,31 +354,68 @@
             <div class="tab-pane fade" id="export" role="tabpanel" aria-labelledby="export-tab">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="mb-0">Export Options</h5>
+                        <h5 class="mb-0">
+                            <i class="fas fa-download me-2"></i>Export Options
+                        </h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="card mb-3">
+                                <div class="export-card card mb-3">
                                     <div class="card-body">
-                                        <h5 class="card-title">CSV Export</h5>
-                                        <p>Download data as CSV files you can open in Excel.</p>
-                                        <p>Step 1: Run the export script on your server</p>
-                                        <code>python export_db.py</code>
-                                        <p class="mt-2">Step 2: Check the "exports" folder for CSV files</p>
+                                        <h5 class="card-title">
+                                            <i class="fas fa-file-excel me-2"></i>Excel Export
+                                        </h5>
+                                        <p class="text-muted">Download data as Excel files (.xlsx) ready to open in Microsoft Excel or Google Sheets.</p>
+                                        <div class="d-grid gap-2">
+                                            <a href="{{ url_for('admin_export_excel', type='bookings') }}" class="btn btn-success">
+                                                <i class="fas fa-calendar-check me-2"></i>Export Bookings to Excel
+                                            </a>
+                                            <a href="{{ url_for('admin_export_excel', type='contacts') }}" class="btn btn-info">
+                                                <i class="fas fa-envelope me-2"></i>Export Contacts to Excel
+                                            </a>
+                                            <a href="{{ url_for('admin_export_excel', type='all') }}" class="btn btn-primary">
+                                                <i class="fas fa-database me-2"></i>Export All Data to Excel
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="card">
+                                <div class="export-card card">
                                     <div class="card-body">
-                                        <h5 class="card-title">JSON Export</h5>
-                                        <p>Download data as JSON format:</p>
-                                        <a href="{{ url_for('admin_export') }}" class="btn btn-primary mb-2">All Data</a>
-                                        <a href="{{ url_for('admin_export', type='bookings') }}" class="btn btn-outline-primary mb-2">Only Bookings</a>
-                                        <a href="{{ url_for('admin_export', type='contacts') }}" class="btn btn-outline-primary">Only Contacts</a>
+                                        <h5 class="card-title">
+                                            <i class="fas fa-code me-2"></i>JSON Export
+                                        </h5>
+                                        <p class="text-muted">Download data as JSON format for developers and integrations.</p>
+                                        <div class="d-grid gap-2">
+                                            <a href="{{ url_for('admin_export', type='bookings') }}" class="btn btn-outline-success">
+                                                <i class="fas fa-calendar-check me-2"></i>Bookings JSON
+                                            </a>
+                                            <a href="{{ url_for('admin_export', type='contacts') }}" class="btn btn-outline-info">
+                                                <i class="fas fa-envelope me-2"></i>Contacts JSON
+                                            </a>
+                                            <a href="{{ url_for('admin_export') }}" class="btn btn-outline-primary">
+                                                <i class="fas fa-database me-2"></i>All Data JSON
+                                            </a>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Export Information:</strong>
+                                    <ul class="mb-0 mt-2">
+                                        <li>Excel files include all data fields with proper formatting</li>
+                                        <li>JSON files are suitable for API integrations and data processing</li>
+                                        <li>All exports include timestamps and are generated in real-time</li>
+                                        <li>Large datasets may take a few seconds to generate</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
