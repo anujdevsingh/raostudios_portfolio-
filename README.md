@@ -136,5 +136,5 @@ raostudios_portfolio/
 ---
 
 <div align="center">
-  <p>Made with ❤️ by Rao Studios</p>
+  <p>Made with ❤️ by Anuj Dev Singh</p>
 </div>
