@@ -1,7 +1,7 @@
 # Razorpay Integration Setup Guide
 
 ## Overview
-Your Flask application has been successfully migrated from PayU to Razorpay payment gateway. This guide will help you set up Razorpay for your Rao Studios portfolio application.
+This guide will help you set up Razorpay for your Rao Studios portfolio application.
 
 ## Prerequisites
 - Razorpay merchant account
@@ -86,6 +86,3 @@ Verify in your Render dashboard that:
 ## Support
 - Razorpay Documentation: [docs.razorpay.com](https://docs.razorpay.com)
 - Razorpay Support: [support.razorpay.com](https://support.razorpay.com)
-
-## Migration Complete ✅
-Your application has been successfully migrated from PayU to Razorpay with all the necessary features and security measures in place. 
